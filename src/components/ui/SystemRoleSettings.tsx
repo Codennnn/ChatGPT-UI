@@ -19,7 +19,7 @@ export default (props: Props) => {
   }
 
   return (
-    <div class="my-4">
+    <div>
       <Show when={!props.systemRoleEditing()}>
         <Show when={props.currentSystemRoleSettings()}>
           <div class="text-slate">

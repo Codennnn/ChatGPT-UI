@@ -72,7 +72,7 @@ export default () => {
           if (char) {
             setCurrentAssistantMessage(currentAssistantMessage() + char)
           }
-          window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})
+          // window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})
         }
         done = readerDone
       }
@@ -137,76 +137,77 @@ export default () => {
   }
 
   return (
-    <div my-6>
-      <SystemRoleSettings
-        canEdit={() => messageList().length === 0}
-        systemRoleEditing={systemRoleEditing}
-        setSystemRoleEditing={setSystemRoleEditing}
-        currentSystemRoleSettings={currentSystemRoleSettings}
-        setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
-      />
-      <Index each={messageList()}>
-        {(message, index) => (
-          <MessageItem
-            role={message().role}
-            message={message().content}
-            showRetry={() => (message().role === 'assistant' && index === messageList().length - 1)}
-            onRetry={retryLastFetch}
-          />
-        )}
-      </Index>
-      {currentAssistantMessage() && (
-        <MessageItem
-          role="assistant"
-          message={currentAssistantMessage}
-        />
-      )}
-      <Show
-        when={!loading()}
-        fallback={() => (
-          <div class="h-12 my-4 flex gap-4 items-center justify-center bg-slate bg-op-15 text-slate rounded-sm">
-            <span>AI is thinking...</span>
-            <div class="px-2 py-0.5 border border-slate text-slate rounded-md text-sm op-70 cursor-pointer hover:bg-slate/10" onClick={stopStreamFetch}>Stop</div>
-          </div>
-        )}
-      >
-        <div class="my-4 flex items-center gap-2 transition-opacity" class:op-50={systemRoleEditing()}>
-          <textarea
-            ref={inputRef!}
-            disabled={systemRoleEditing()}
-            onKeyDown={handleKeydown}
-            placeholder="Enter something..."
-            autocomplete="off"
-            autofocus
-            onInput={() => {
-              inputRef.style.height = 'auto';
-              inputRef.style.height = inputRef.scrollHeight + 'px';
-            }}
-            rows="1"
-            w-full
-            px-3 py-3
-            min-h-12
-            max-h-36
-            text-slate
-            rounded-sm
-            bg-slate
-            bg-op-15
-            resize-none
-            focus:bg-op-20
-            focus:ring-0
-            focus:outline-none
-            placeholder:text-slate-400
-            placeholder:op-30
-            scroll-pa-8px
-          />
-          <button onClick={handleButtonClick} disabled={systemRoleEditing()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
-            Send
-          </button>
-          <button title="Clear" onClick={clear} disabled={systemRoleEditing()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
-            <IconClear />
-          </button>
+    <main class="relative">
+      <div class="">
+        <div class="w-50vw mx-auto pb-35">
+          {/* <SystemRoleSettings
+            canEdit={() => messageList().length === 0}
+            systemRoleEditing={systemRoleEditing}
+            setSystemRoleEditing={setSystemRoleEditing}
+            currentSystemRoleSettings={currentSystemRoleSettings}
+            setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
+          /> */}
+          <Index each={messageList()}>
+            {(message, index) => (
+              <MessageItem
+                role={message().role}
+                message={message().content}
+                showRetry={() => (message().role === 'assistant' && index === messageList().length - 1)}
+                onRetry={retryLastFetch}
+              />
+            )}
+          </Index>
+          {currentAssistantMessage() && (
+            <MessageItem
+              role="assistant"
+              message={currentAssistantMessage}
+            />
+          )}
         </div>
-      </Show>
-    </div>
+
+        <Show
+          when={!loading()}
+          fallback={() => (
+            <div class="h-12 my-4 flex gap-4 items-center justify-center bg-slate bg-op-15 text-slate rounded-sm">
+              <span>AI is thinking...</span>
+              <div class="px-2 py-0.5 border border-slate text-slate rounded-md text-sm op-70 cursor-pointer hover:bg-slate/10" onClick={stopStreamFetch}>Stop</div>
+            </div>
+          )}
+        >
+          <div class="fixed left-1/2 -translate-x-1/2 bottom-5 w-50vw my-4 flex items-center gap-2" class:op-50={systemRoleEditing()}>
+            <textarea
+              ref={inputRef!}
+              disabled={systemRoleEditing()}
+              onKeyDown={handleKeydown}
+              placeholder="Enter something..."
+              autocomplete="off"
+              autofocus
+              onInput={() => {
+                inputRef.style.height = 'auto';
+                inputRef.style.height = inputRef.scrollHeight + 'px';
+              }}
+              rows="1"
+              w-full
+              px-3 py-3
+              min-h-12
+              max-h-36
+              text-slate
+              rounded-sm
+              bg-slate
+              resize-none
+              focus:ring-0
+              focus:outline-none
+              placeholder:text-slate-400
+            />
+            <button onClick={handleButtonClick} disabled={systemRoleEditing()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
+              Send
+            </button>
+            <button title="Clear" onClick={clear} disabled={systemRoleEditing()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
+              <IconClear />
+            </button>
+          </div>
+        </Show>
+      </div>
+    </main>
   )
 }
