@@ -97,7 +97,7 @@ export default () => {
       setCurrentAssistantMessage('')
       setLoading(false)
       setController(null)
-      // inputRef.focus()
+      inputRef.focus()
     }
   }
 
