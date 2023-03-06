@@ -175,7 +175,7 @@ export default () => {
             class="relative z-10 flex items-center rounded-lg md:rounded-xl text-slate-500 outline-slate/20 outline focus-within:shadow-[0_0_25px_0px_rgba(100_116_139_/_0.6)] bg-#0c1013 overflow-hidden transition-all"
             class:op-50={systemRoleEditing()}
           >
-            {!loading()
+            {loading()
               ? (
                 <div class="relative w-full h-63.98px flex items-center">
                   <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-10">
