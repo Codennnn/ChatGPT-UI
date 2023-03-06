@@ -33,13 +33,13 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
       }} />}
 
       <div class="flex gap-3 md:gap-6 pl-3 pr-5 py-5 md:py-10 md:px-20 rounded-lg">
-        <div class={`shrink-0 flex items-center justify-center w-6 h-6 md:w-10 md:h-10 md:-mt-2 select-none rounded-md md:rounded-lg ${role === 'user' ? 'bg-#1b2429' : 'bg-#ccf5cf text-#010004 md:p-2 p-1'}`}>
+        <div class={`shrink-0 flex items-center justify-center w-6 h-6 md:w-10 md:h-10 mt-4 md:mt-2.5 select-none rounded-md md:rounded-lg ${role === 'user' ? 'bg-#1b2429' : 'bg-#ccf5cf text-#010004 md:p-2 p-1'}`}>
           {role === 'user' 
           ? <span class="hidden md:inline text-xs">YOU</span>
           : <Logo/>
           }
         </div>
-        <div class="message text-slate break-words overflow-hidden" innerHTML={htmlString()} />
+        <div class="message prose text-slate break-words overflow-hidden" innerHTML={htmlString()} />
       </div>
 
       {role!=='user' && <div class="h-1px opacity-30" style={{

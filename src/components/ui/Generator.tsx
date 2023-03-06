@@ -137,9 +137,9 @@ export default () => {
   }
 
   return (
-    <main class="relative">
-      <div class="relative w-full md:w-1000px md:max-w-screen mx-auto">
-        <div class=" md:py-10">
+    <main>
+      <div class="relative w-full md:w-800px md:max-w-screen mx-auto">
+        <div class="md:py-10">
           {/* <SystemRoleSettings
             canEdit={() => messageList().length === 0}
             systemRoleEditing={systemRoleEditing}
