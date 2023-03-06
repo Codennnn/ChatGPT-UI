@@ -138,8 +138,8 @@ export default () => {
 
   return (
     <main class="relative">
-      <div class="relative w-60vw mx-auto">
-        <div class="pb-10">
+      <div class="relative w-full md:w-1000px md:max-w-screen mx-auto">
+        <div class=" md:py-10">
           {/* <SystemRoleSettings
             canEdit={() => messageList().length === 0}
             systemRoleEditing={systemRoleEditing}
@@ -165,44 +165,52 @@ export default () => {
           )}
         </div>
 
-        <div class="sticky left-0 right-0 bottom-0 pb-8 pt-25"  style={{
-        background: 'linear-gradient(0, #010004 0%, rgb(1 0 5 / 80%) 60%, transparent 100%)'
-      }}>
-          <div class="relative flex items-center min-h-12 rounded-md text-slate-500 shadow-slate-800 shadow-lg shadow-[1_2] bg-#0c1013" class:op-50={systemRoleEditing()}>
+        <div class="sticky z-10 left-0 right-0 bottom-0 pb-8 pt-25 px-3 md:px-15 after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-20 after:bg-#010004">
+          <div
+          class="absolute z-10 left-0 right-0 top-0 min-h-50"
+          style={{
+            background: 'linear-gradient(0, #010004 0%, rgb(1 0 5 / 80%) 60%, transparent 100%)'
+          }} />
+          <div
+            class="relative z-10 flex items-center rounded-lg md:rounded-xl text-slate-500 outline-slate/20 outline focus-within:shadow-[0_0_25px_0px_rgba(100_116_139_/_0.6)] bg-#0c1013 overflow-hidden transition-all"
+            class:op-50={systemRoleEditing()}
+          >
             {loading()
               ? (
-                <span class="w-10 absolute left-1/2 -translate-x-1/2">
-                  <svg version="1.1" id="L5" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                    viewBox="0 0 100 100" enable-background="new 0 0 0 0">
-                    <circle fill="currentcolor" stroke="none" cx="6" cy="50" r="6">
-                      <animateTransform 
-                        attributeName="transform" 
-                        dur="1s" 
-                        type="translate" 
-                        values="0 15 ; 0 -15; 0 15" 
-                        repeatCount="indefinite" 
-                        begin="0.1"/>
-                    </circle>
-                    <circle fill="currentcolor" stroke="none" cx="30" cy="50" r="6">
-                      <animateTransform 
-                        attributeName="transform" 
-                        dur="1s" 
-                        type="translate" 
-                        values="0 10 ; 0 -10; 0 10" 
-                        repeatCount="indefinite" 
-                        begin="0.2"/>
-                    </circle>
-                    <circle fill="currentcolor" stroke="none" cx="54" cy="50" r="6">
-                      <animateTransform 
-                        attributeName="transform" 
-                        dur="1s" 
-                        type="translate" 
-                        values="0 5 ; 0 -5; 0 5" 
-                        repeatCount="indefinite" 
-                        begin="0.3"/>
-                    </circle>
-                  </svg>
-                </span>
+                <div class="relative w-full h-63.98px">
+                  <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-10">
+                    <svg version="1.1" id="L5" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                      viewBox="0 0 100 100" enable-background="new 0 0 0 0">
+                      <circle fill="currentcolor" stroke="none" cx="6" cy="50" r="6">
+                        <animateTransform 
+                          attributeName="transform" 
+                          dur="1s" 
+                          type="translate" 
+                          values="0 15 ; 0 -15; 0 15" 
+                          repeatCount="indefinite" 
+                          begin="0.1"/>
+                      </circle>
+                      <circle fill="currentcolor" stroke="none" cx="30" cy="50" r="6">
+                        <animateTransform 
+                          attributeName="transform" 
+                          dur="1s" 
+                          type="translate" 
+                          values="0 10 ; 0 -10; 0 10" 
+                          repeatCount="indefinite" 
+                          begin="0.2"/>
+                      </circle>
+                      <circle fill="currentcolor" stroke="none" cx="54" cy="50" r="6">
+                        <animateTransform 
+                          attributeName="transform" 
+                          dur="1s" 
+                          type="translate" 
+                          values="0 5 ; 0 -5; 0 5" 
+                          repeatCount="indefinite" 
+                          begin="0.3"/>
+                      </circle>
+                    </svg>
+                  </span>
+                </div>
                 )
               : (<>
               <textarea
