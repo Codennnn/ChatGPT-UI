@@ -138,8 +138,8 @@ export default () => {
 
   return (
     <main class="relative">
-      <div class="">
-        <div class="w-50vw mx-auto pb-35">
+      <div class="relative w-60vw mx-auto">
+        <div class="pb-10">
           {/* <SystemRoleSettings
             canEdit={() => messageList().length === 0}
             systemRoleEditing={systemRoleEditing}
@@ -165,48 +165,68 @@ export default () => {
           )}
         </div>
 
-        <Show
-          when={!loading()}
-          fallback={() => (
-            <div class="h-12 my-4 flex gap-4 items-center justify-center bg-slate bg-op-15 text-slate rounded-sm">
-              <span>AI is thinking...</span>
-              <div class="px-2 py-0.5 border border-slate text-slate rounded-md text-sm op-70 cursor-pointer hover:bg-slate/10" onClick={stopStreamFetch}>Stop</div>
-            </div>
-          )}
-        >
-          <div class="fixed left-1/2 -translate-x-1/2 bottom-5 w-50vw my-4 flex items-center gap-2" class:op-50={systemRoleEditing()}>
-            <textarea
-              ref={inputRef!}
-              disabled={systemRoleEditing()}
-              onKeyDown={handleKeydown}
-              placeholder="Enter something..."
-              autocomplete="off"
-              autofocus
-              onInput={() => {
-                inputRef.style.height = 'auto';
-                inputRef.style.height = inputRef.scrollHeight + 'px';
-              }}
-              rows="1"
-              w-full
-              px-3 py-3
-              min-h-12
-              max-h-36
-              text-slate
-              rounded-sm
-              bg-slate
-              resize-none
-              focus:ring-0
-              focus:outline-none
-              placeholder:text-slate-400
-            />
-            <button onClick={handleButtonClick} disabled={systemRoleEditing()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
-              Send
-            </button>
-            <button title="Clear" onClick={clear} disabled={systemRoleEditing()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
-              <IconClear />
-            </button>
+        <div class="sticky left-0 right-0 bottom-0 pb-8 pt-25"  style={{
+        background: 'linear-gradient(0, #010004 0%, rgb(1 0 5 / 80%) 60%, transparent 100%)'
+      }}>
+          <div class="relative flex items-center min-h-12 rounded-md text-slate-500 shadow-slate-800 shadow-lg shadow-[1_2] bg-#0c1013" class:op-50={systemRoleEditing()}>
+            {loading()
+              ? (
+                <span class="w-10 absolute left-1/2 -translate-x-1/2">
+                  <svg version="1.1" id="L5" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                    viewBox="0 0 100 100" enable-background="new 0 0 0 0">
+                    <circle fill="currentcolor" stroke="none" cx="6" cy="50" r="6">
+                      <animateTransform 
+                        attributeName="transform" 
+                        dur="1s" 
+                        type="translate" 
+                        values="0 15 ; 0 -15; 0 15" 
+                        repeatCount="indefinite" 
+                        begin="0.1"/>
+                    </circle>
+                    <circle fill="currentcolor" stroke="none" cx="30" cy="50" r="6">
+                      <animateTransform 
+                        attributeName="transform" 
+                        dur="1s" 
+                        type="translate" 
+                        values="0 10 ; 0 -10; 0 10" 
+                        repeatCount="indefinite" 
+                        begin="0.2"/>
+                    </circle>
+                    <circle fill="currentcolor" stroke="none" cx="54" cy="50" r="6">
+                      <animateTransform 
+                        attributeName="transform" 
+                        dur="1s" 
+                        type="translate" 
+                        values="0 5 ; 0 -5; 0 5" 
+                        repeatCount="indefinite" 
+                        begin="0.3"/>
+                    </circle>
+                  </svg>
+                </span>
+                )
+              : (<>
+              <textarea
+                ref={inputRef!}
+                disabled={loading() || systemRoleEditing()}
+                onKeyDown={handleKeydown}
+                placeholder="Write your question here..."
+                autocomplete="off"
+                autofocus
+                onInput={() => {
+                  inputRef.style.height = 'auto';
+                  inputRef.style.height = inputRef.scrollHeight + 'px';
+                }}
+                rows="1"
+                class="w-full min-h-12 max-h-60 py-5 px-4 bg-transparent resize-none focus:outline-none text-slate-400 placeholder:text-slate-500"
+              />
+              <button onClick={handleButtonClick} disabled={loading() || systemRoleEditing()} class="absolute right-0 bottom-2.8 flex items-center pl-2 pr-5 py-3 bg-#0c1013 transition-colors duration-200 hover:text-#ccf5cf text-sm text-current">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 10 20 15 15 20"></polyline><path d="M4 4v7a4 4 0 0 0 4 4h12"></path></svg>
+                <span class="ml-2">ENTER</span>
+                </button>
+              </>)
+            }
           </div>
-        </Show>
+        </div>
       </div>
     </main>
   )
