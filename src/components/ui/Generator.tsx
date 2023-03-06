@@ -163,7 +163,7 @@ export default () => {
           )}
         </div>
 
-        <div class="sticky z-10 left-0 right-0 bottom-0 pb-8 pt-25 px-3 md:px-15 after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-20 after:bg-#010004">
+        <div class="sticky z-10 left-0 right-0 bottom-0 pb-2 md:pb-4 pt-25 px-3 md:px-15 after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-20 after:bg-#010004">
           <div
           class="absolute z-10 left-0 right-0 top-0 min-h-50"
           style={{
