@@ -1,5 +1,5 @@
 import type { ChatMessage } from '@/types'
-import { createSignal, Index, Show } from 'solid-js'
+import { createSignal, Index } from 'solid-js'
 import IconClear from './icons/Clear'
 import MessageItem from './MessageItem'
 import SystemRoleSettings from './SystemRoleSettings'
@@ -97,7 +97,7 @@ export default () => {
       setCurrentAssistantMessage('')
       setLoading(false)
       setController(null)
-      inputRef.focus()
+      // inputRef.focus()
     }
   }
 
@@ -119,7 +119,7 @@ export default () => {
   const retryLastFetch = () => {
     if (messageList().length > 0) {
       const lastMessage = messageList()[messageList().length - 1]
-      console.log(lastMessage)
+      // console.log(lastMessage)
       if (lastMessage.role === 'assistant') {
         setMessageList(messageList().slice(0, -1))
         requestWithLatestMessage()
@@ -152,8 +152,6 @@ export default () => {
               <MessageItem
                 role={message().role}
                 message={message().content}
-                showRetry={() => (message().role === 'assistant' && index === messageList().length - 1)}
-                onRetry={retryLastFetch}
               />
             )}
           </Index>
@@ -171,6 +169,7 @@ export default () => {
           style={{
             background: 'linear-gradient(0, #010004 0%, rgb(1 0 5 / 80%) 60%, transparent 100%)'
           }} />
+
           <div
             class="relative z-10 flex items-center rounded-lg md:rounded-xl text-slate-500 outline-slate/20 outline focus-within:shadow-[0_0_25px_0px_rgba(100_116_139_/_0.6)] bg-#0c1013 overflow-hidden transition-all"
             class:op-50={systemRoleEditing()}
@@ -210,10 +209,6 @@ export default () => {
                       </circle>
                     </svg>
                   </span>
-                  <button
-                    class="ml-auto mr-3 px-3 py-2 text-slate rounded text-sm font-bold cursor-pointer bg-slate-800 hover:bg-slate-800/80"
-                    onClick={stopStreamFetch}
-                  >STOP</button>
                 </div>
                 )
               : (<>
@@ -238,15 +233,32 @@ export default () => {
               </>)
             }
           </div>
-          <div class="relative z-10 flex items-center py-2 px-2 justify-end">
+
+          <div class="relative z-10 flex items-center py-2 justify-end">
             {messageList().length > 0 && (
               <button
                 onClick={clear}
                 disabled={loading() || systemRoleEditing()}
                 class="px-2 py-1 bg-op-15 rounded-sm hover:text-#ccf5cf text-xs text-slate-500 transition-colors">
-                CLEAR ALL
+                Clear All
               </button>
             )
+            }
+            {loading()
+            ? (
+            <button
+              class="px-2 py-1 bg-op-15 rounded-sm hover:text-#ccf5cf text-sm text-slate-500 transition-colors"
+              onClick={stopStreamFetch}
+            >Stop</button>
+            )
+            : messageList().at(-1)?.role === 'assistant'
+            ? (
+            <button
+              class="px-2 py-1 bg-op-15 rounded-sm hover:text-#ccf5cf text-sm text-slate-500 transition-colors"
+              onClick={retryLastFetch}
+            >Regernate</button>
+            )
+            : null
             }
           </div>
         </div>

@@ -10,11 +10,9 @@ import {Logo} from './Logo'
 interface Props {
   role: ChatMessage['role']
   message: Accessor<string> | string
-  showRetry?: Accessor<boolean>
-  onRetry?: () => void
 }
 
-export default ({ role, message, showRetry, onRetry }: Props) => {
+export default ({ role, message }: Props) => {
   const htmlString = () => {
     const md = MarkdownIt().use(mdKatex).use(mdHighlight)
 
