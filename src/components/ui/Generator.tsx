@@ -175,9 +175,9 @@ export default () => {
             class="relative z-10 flex items-center rounded-lg md:rounded-xl text-slate-500 outline-slate/20 outline focus-within:shadow-[0_0_25px_0px_rgba(100_116_139_/_0.6)] bg-#0c1013 overflow-hidden transition-all"
             class:op-50={systemRoleEditing()}
           >
-            {loading()
+            {!loading()
               ? (
-                <div class="relative w-full h-63.98px">
+                <div class="relative w-full h-63.98px flex items-center">
                   <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-10">
                     <svg version="1.1" id="L5" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                       viewBox="0 0 100 100" enable-background="new 0 0 0 0">
@@ -210,6 +210,10 @@ export default () => {
                       </circle>
                     </svg>
                   </span>
+                  <button
+                    class="ml-auto mr-3 px-3 py-2 text-slate rounded text-sm font-bold cursor-pointer bg-slate-800 hover:bg-slate-800/80"
+                    onClick={stopStreamFetch}
+                  >STOP</button>
                 </div>
                 )
               : (<>
@@ -232,6 +236,17 @@ export default () => {
                 <span class="ml-2">ENTER</span>
                 </button>
               </>)
+            }
+          </div>
+          <div class="relative z-10 flex items-center py-2 px-2 justify-end">
+            {messageList().length > 0 && (
+              <button
+                onClick={clear}
+                disabled={loading() || systemRoleEditing()}
+                class="px-2 py-1 bg-op-15 rounded-sm hover:text-#ccf5cf text-xs text-slate-500 transition-colors">
+                CLEAR ALL
+              </button>
+            )
             }
           </div>
         </div>
