@@ -1,5 +1,5 @@
 import type { ChatMessage } from '@/types'
-import { createSignal, Index } from 'solid-js'
+import { createSignal, Index, onMount } from 'solid-js'
 import IconClear from './icons/Clear'
 import MessageItem from './MessageItem'
 import SystemRoleSettings from './SystemRoleSettings'
@@ -12,6 +12,18 @@ export default () => {
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
+
+  onMount(() => {
+    window.document.addEventListener('keydown', function(ev) {
+      if (ev.key === 'Enter') {
+        if (document.activeElement !== inputRef) {
+          ev.stopPropagation()
+          ev.preventDefault()
+          inputRef.focus()
+        }
+      }
+    })
+  })
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
