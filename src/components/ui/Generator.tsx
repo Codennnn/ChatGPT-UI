@@ -186,7 +186,10 @@ export default () => {
             class="relative z-10 flex items-center rounded-lg md:rounded-xl text-slate-500 outline-slate/20 outline focus-within:shadow-[0_0_25px_0px_rgba(100_116_139_/_0.6)] bg-#0c1013 overflow-hidden transition-all"
             class:op-50={systemRoleEditing()}
           >
-            {loading()
+            <div class="relative w-full h-63.98px flex items-center justify-center">
+                    免费使用额度已用光，欢迎下次体验。
+                </div>
+            {/* {loading()
               ? (
                 <div class="relative w-full h-63.98px flex items-center">
                   <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-10">
@@ -243,7 +246,7 @@ export default () => {
                 <span class="ml-2">ENTER</span>
                 </button>
               </>)
-            }
+            } */}
           </div>
 
           <div class="relative z-10 flex items-center py-2 justify-end">
